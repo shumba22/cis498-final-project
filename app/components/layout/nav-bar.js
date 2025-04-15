@@ -41,12 +41,6 @@ export function NavBar() {
             <a href="/products" className="text-gray-600 hover:text-gray-900">
               Products
             </a>
-            <a href="/pricing" className="text-gray-600 hover:text-gray-900">
-              Pricing
-            </a>
-            <a href="/about" className="text-gray-600 hover:text-gray-900">
-              About
-            </a>
           </div>
 
           {/* Desktop Sign In / Profile Button */}
@@ -106,18 +100,7 @@ export function NavBar() {
               >
                 Tools
               </a>
-              <a
-                href="/profile"
-                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-              >
-                Pricing
-              </a>
-              <a
-                href="/about"
-                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-              >
-                About
-              </a>
+              
               <div className="flex flex-row justify-center">
                 <button
                   onClick={handleButtonClick}
