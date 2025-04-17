@@ -18,7 +18,7 @@ export default function ProductCard({ key, tool }) {
   return (
     <div
       key={tool.id}
-      className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition"
+      className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md hover:scale-105 hover:cursor-pointer transition"
       onClick={handleClick}
     >
       <div className="p-4">

@@ -45,10 +45,7 @@ export default async function ProductsPage({ searchParams }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <section className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">
-          {selectedCategory === "all" ? "All Tools" : selectedCategory}
-        </h1>
-        {/* client‐side filter UI */}
+
         <div className="mb-4 mt-12">
           <SearchBar />
         </div>
