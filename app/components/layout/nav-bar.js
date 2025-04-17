@@ -15,7 +15,7 @@ export function NavBar() {
 
   const handleButtonClick = () => {
     if (status === "authenticated") {
-      router.push("/profile");
+      router.push("/dashboard");
     } else {
       router.push("/auth/login");
     }
@@ -31,50 +31,48 @@ export function NavBar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <a href="/" className="text-xl font-bold text-gray-800">
+            <a href="/homepage" className="text-xl font-bold text-gray-800">
               DevTools
             </a>
           </div>
-
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a href="/products" className="text-gray-600 hover:text-gray-900">
+          <div className="hidden md:flex flex-1 justify-center items-center space-x-4">
+            <a href="/products" className="text-gray-600 hover:text-gray-900 absolute left-1/2 transform -translate-x-1/2">
               Products
             </a>
           </div>
-
-          {/* Desktop Sign In / Profile Button */}
-          <div className="hidden md:flex items-center">
-            <button
-              onClick={handleButtonClick}
-              className="flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
-            >
-              {status === "authenticated" ? (
-                <>
-                  <img
-                    src={user.user.image}
-                    alt="User Profile"
-                    className="h-4 w-4 rounded-full mr-2"
-                  />
-                  <span>{user?.user?.name}</span>
-                </>
-              ) : (
-                <>
-                  <FaUser className="h-4 w-4 mr-2" />
-                  Sign In
-                </>
-              )}
-            </button>
-            {status === "authenticated" && (
+          {status !== "loading" && (
+            <div className="hidden md:flex items-center">
               <button
-                onClick={handleLogout}
-                className="ml-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                onClick={handleButtonClick}
+                className="flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
               >
-                Logout
+                {status === "authenticated" ? (
+                  <>
+                    <img
+                      src={user.user.image}
+                      alt="User Profile"
+                      className="h-4 w-4 rounded-full mr-2"
+                    />
+                    <span>{user.user.name}</span>
+                  </>
+                ) : (
+                  <>
+                    <FaUser className="h-4 w-4 mr-2" />
+                    Sign In
+                  </>
+                )}
               </button>
-            )}
-          </div>
-
+              {status === "authenticated" && (
+                <button
+                  onClick={handleLogout}
+                  className="ml-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+          )}
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
@@ -98,9 +96,9 @@ export function NavBar() {
                 href="/products"
                 className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
               >
-                Tools
+                Products
               </a>
-              
+
               <div className="flex flex-row justify-center">
                 <button
                   onClick={handleButtonClick}
