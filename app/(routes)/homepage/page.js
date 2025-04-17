@@ -37,15 +37,14 @@ export default function HomePage() {
                 your development workflow
               </p>
               <div className="flex flex-col sm:flex-row gap-4 text-xl">
-                <button className="bg-white font-bold text-indigo-600 px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+                <a href="/products" className="bg-white font-bold text-indigo-600 px-6 py-3 rounded-lg hover:bg-gray-100 transition">
                   Browse Tools
-                </button>
-                <button
-                  href="/auth/register"
+                </a>
+                <a href="/auth/register"
                   className="bg-transparent border-2 border-white px-6 py-3 rounded-lg font-bold hover:bg-white/10 transition"
                 >
                   Become a Seller
-                </button>
+                </a>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">

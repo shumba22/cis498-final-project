@@ -1,3 +1,5 @@
+export const revalidate = 30;
+
 import ProductFilters from "@/components/products/product-filters";
 import ProductCard from "@/components/products/product-card";
 import SearchBar from "@/components/ui/search-bar";
