@@ -1,4 +1,4 @@
-export const revalidate = 30;
+export const revalidate = 60;
 
 import ProductFilters from "@/components/products/product-filters";
 import ProductCard from "@/components/products/product-card";
@@ -6,7 +6,7 @@ import SearchBar from "@/components/ui/search-bar";
 import { PRODUCT_QUERIES } from "@/lib/db/actions";
 
 export default async function ProductsPage({ searchParams }) {
-  const { category, search } = searchParams;
+  const { category, search } = await searchParams;
   const selectedCategory = category ?? "all";
   const searchTerm = search ?? "";
   const searchTermLower = searchTerm.toLowerCase();
