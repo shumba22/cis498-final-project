@@ -10,7 +10,7 @@ export default async function ProfilePage() {
     redirect("/auth/login");
   }
 
-  const user = await USER_QUERIES.getById(session.user.id);
-
-  return (<OrdersTab user={user} />);
+  const user = await USER_QUERIES.getUserOrders(session.user.id);
+  console.log("User orders:", user.orders);
+  return (<OrdersTab orders={user.orders} />);
 }

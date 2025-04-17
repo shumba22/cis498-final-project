@@ -25,26 +25,26 @@ export default function OrdersTab({ orders }) {
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-sm">
       <table className="w-full">
         <thead>
-          <tr className="border-b border-gray-200">
-            <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+          <tr className="border-b border-gray-200 text-md font-medium text-gray-500">
+            <th className="text-left py-3 px-2">
               Order ID
             </th>
-            <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+            <th className="text-left py-3 px-2">
               Date
             </th>
-            <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+            <th className="text-left py-3 px-2">
               Amount
             </th>
-            <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+            <th className="text-left py-3 px-2">
               Status
             </th>
-            <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+            <th className="text-left py-3 px-2">
               Items
             </th>
-            <th className="text-right py-3 px-2 text-sm font-medium text-gray-500">
+            <th className="text-right py-3 px-2">
               Actions
             </th>
           </tr>
@@ -53,15 +53,15 @@ export default function OrdersTab({ orders }) {
           {orders.map((order) => (
             <tr
               key={order.id}
-              className="border-b border-gray-100 hover:bg-gray-50"
+              className="border-b border-gray-100 hover:bg-gray-50 text-gray-600"
             >
               <td className="py-3 px-2 text-sm font-medium">
                 #{order.id.substring(0, 8)}
               </td>
-              <td className="py-3 px-2 text-sm text-gray-600">
+              <td className="py-3 px-2 text-md text-gray-600">
                 {formatDate(order.orderDate)}
               </td>
-              <td className="py-3 px-2 text-sm font-medium">
+              <td className="py-3 px-2 text-md font-medium text-gray-600">
                 ${Number(order.amount).toFixed(2)}
               </td>
               <td className="py-3 px-2">

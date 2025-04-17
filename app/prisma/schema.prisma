@@ -83,10 +83,12 @@ model User {
 model Business {
   id             String    @id @default(cuid())
   name           String
+  description    String    
   status         String    @default("PENDING")
   userId         String    @unique @map("user_id") 
   user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   products       Product[]
+
   supportRequests SupportRequest[]
 
   @@map("businesses")

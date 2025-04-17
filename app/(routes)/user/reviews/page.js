@@ -10,7 +10,7 @@ export default async function ReviewsPage() {
     redirect("/auth/login");
   }
 
-  const user = await USER_QUERIES.getById(session.user.id);
+  const user = await USER_QUERIES.getReviews(session.user.id);
 
   console.log("User reviews:", user.reviews);
 

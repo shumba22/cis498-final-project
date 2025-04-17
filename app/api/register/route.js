@@ -7,7 +7,7 @@ export async function POST(request) {
     const body = await request.json();
 
     const { email, password, name, role, businessName, businessDescription } =
-      body; // Use 'name' instead of 'username' to match frontend
+      body; 
 
     if (!email || !password || !name) {
       return NextResponse.json(
@@ -42,9 +42,9 @@ export async function POST(request) {
       const newUser = await tx.user.create({
         data: {
           email,
-          name, // Store the name provided
+          name, 
           password: hashedPassword,
-          role: role === "BUSINESS" ? "BUSINESS" : "USER", // Ensure role is set correctly
+          role: role === "BUSINESS" ? "BUSINESS" : "USER",
           // Add emailVerified: null here if implementing verification later
         },
       });

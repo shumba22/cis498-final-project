@@ -1,5 +1,61 @@
 import { prisma } from "@/prisma/client";
 
+export const BUSINESS_QUERIES = {
+  getById: async (userId) => {
+    return prisma.business.findUnique({
+      where: { userId },
+      include: {
+        // grab each product’s reviews + sales
+        products: {
+          include: {
+            reviews: true,
+            orderItems: {
+              include: { order: true },
+            },
+          },
+        },
+        supportRequests: true,
+      },
+    });
+  },
+  updateBusiness: async (id, name, description) => {
+    await prisma.business.update({
+      where: { id },
+      data: { businessName: name, businessDescription: description },
+    });
+  },
+  getOrdersForBusiness: async (businessId) => {
+    // 1) load every product + its orderItems + the parent order + buyer
+    const biz = await prisma.business.findUnique({
+      where: { id: businessId },
+      include: {
+        products: {
+          include: {
+            orderItems: {
+              include: {
+                order: { include: { buyer: true } },
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!biz) return [];
+
+    // 2) flatten out one array of order‑records
+    return biz.products.flatMap((p) =>
+      p.orderItems.map((oi) => ({
+        id: oi.order.id,
+        orderDate: oi.order.orderDate,
+        buyerName: oi.order.buyer.name,
+        total: oi.order.amount.toString(),
+        productName: p.name,
+        quantity: oi.quantity,
+      }))
+    );
+  },
+};
+
 export const USER_QUERIES = {
   getByEmail: (email) => prisma.user.findUnique({ where: { email } }),
   getById: (id) => prisma.user.findUnique({ where: { id } }),
@@ -12,6 +68,41 @@ export const USER_QUERIES = {
     });
   },
   getAllUsers: () => prisma.user.findMany(),
+  getUserOrders: (userId) => {
+    return prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        orders: {
+          include: {
+            orderItems: {
+              include: { product: true },
+            },
+          },
+        },
+      },
+    });
+  },
+  getReviews: (userId) => {
+    return prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        reviews: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+  },
+
+  getSupportRequests: (userId) => {
+    return prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        supportRequests: true,
+      },
+    });
+  }
 };
 
 export const USER_MUTATIONS = {

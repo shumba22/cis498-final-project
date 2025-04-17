@@ -1,4 +1,4 @@
-import { PRODUCT_QUERIES } from "../../lib/db/actions";
+import { PRODUCT_QUERIES } from "@/lib/db/actions";
 import ProductCard from "./product-card";
 
 export default async function FeaturedProducts() {
