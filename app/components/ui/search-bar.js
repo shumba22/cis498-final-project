@@ -1,16 +1,23 @@
 "use client";
 
 import { FiSearch as Search } from "react-icons/fi";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchParams = useSearchParams();
   const router = useRouter();
+  const param = searchParams.get("search") ?? "";
+
+  const [searchTerm, setSearchTerm] = useState(param);
+
+  useEffect(() => {
+    setSearchTerm(param);
+  }, [param]);
 
   const handleSearch = () => {
     if (searchTerm) {
-      router.push(`/products/search?query=${searchTerm}`);
+      router.push(`/products?search=${searchTerm}`);
     }
   };
 

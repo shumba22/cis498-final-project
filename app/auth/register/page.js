@@ -83,7 +83,7 @@ export default function RegisterPage() {
   };
 
   const handleGithubSignIn = () => {
-    signIn("github", { callbackUrl: "/dashboard" });
+    signIn("github", { callbackUrl: "/homepage" });
   };
 
   return (

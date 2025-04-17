@@ -1,4 +1,4 @@
-import { auth } from "@/app/auth";
+import { auth } from "./lib/auth";
 import { NextResponse } from "next/server";
 
 export default auth((req) => {
@@ -23,6 +23,10 @@ export default auth((req) => {
     nextUrl.pathname.startsWith("/businesses/dashboard") &&
     auth?.user?.role !== "business"
   ) {
+    return NextResponse.redirect(new URL("/", nextUrl));
+  }
+
+  if (nextUrl.pathname.startsWith("/user") && auth?.user?.role !== "user") {
     return NextResponse.redirect(new URL("/", nextUrl));
   }
 

@@ -15,7 +15,7 @@ export function NavBar() {
 
   const handleButtonClick = () => {
     if (status === "authenticated") {
-      router.push("/dashboard");
+      router.push("/user");
     } else {
       router.push("/auth/login");
     }
@@ -45,7 +45,7 @@ export function NavBar() {
             <div className="hidden md:flex items-center">
               <button
                 onClick={handleButtonClick}
-                className="flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                className="flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 hover:cursor-pointer"
               >
                 {status === "authenticated" ? (
                   <>
@@ -66,7 +66,7 @@ export function NavBar() {
               {status === "authenticated" && (
                 <button
                   onClick={handleLogout}
-                  className="ml-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                  className="ml-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 hover:cursor-pointer"
                 >
                   Logout
                 </button>

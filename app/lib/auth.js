@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { USER_QUERIES } from "@/lib/db/actions";
+import { USER_QUERIES } from "./db/actions";
 
 const prisma = new PrismaClient();
 

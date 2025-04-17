@@ -3,7 +3,8 @@ import ReviewSection from "@/components/products/review-section";
 import { PRODUCT_QUERIES } from "@/lib/db/actions";
 
 export default async function ProductPage({ params }) {
-  const raw = await PRODUCT_QUERIES.getProductDetailsWithReviews(params.id);
+  const { id } = params;
+  const raw = await PRODUCT_QUERIES.getProductDetailsWithReviews(id);
 
   if (!raw) {
     return (
