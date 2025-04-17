@@ -1,5 +1,6 @@
-import CategorySelector from "../../components/products/category-selector";
-import SearchBar from "../../components/ui/search-bar";
+import CategorySelector from "@/components/products/category-selector";
+import SearchBar from "@/components/ui/search-bar";
+import FeaturedProducts from "@/components/products/featured-components";
 import {
   FiChevronRight as ChevronRight,
   FiCode as Code,
@@ -10,7 +11,7 @@ import {
   FiTag as Tag,
   FiBarChart2 as BarChart,
 } from "react-icons/fi";
-import FeaturedProducts from "../../components/products/featured-components";
+import { Suspense } from "react";
 
 export default function HomePage() {
   const categories = [
@@ -56,8 +57,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Search Bar */}
-      <SearchBar />
+      <Suspense
+        fallback={
+          <div className="container mx-auto px-4 mt-8 text-center">
+            Loading…
+          </div>
+        }
+      >
+        <SearchBar />
+      </Suspense>
 
       {/* Categories */}
       <section className="py-12">
