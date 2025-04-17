@@ -1,6 +1,5 @@
-import CategorySelector from "@/components/products/category-selector";
-import dynamic from "next/dynamic";
-import SearchBar from "@/components/ui/search-bar";
+import CategorySelector from "../../components/products/category-selector";
+import SearchBar from "../../components/ui/search-bar";
 import {
   FiChevronRight as ChevronRight,
   FiCode as Code,
@@ -11,7 +10,7 @@ import {
   FiTag as Tag,
   FiBarChart2 as BarChart,
 } from "react-icons/fi";
-import FeaturedProducts from "@/components/products/featured-components";
+import FeaturedProducts from "../../components/products/featured-components";
 
 export default function HomePage() {
   const categories = [
@@ -40,7 +39,10 @@ export default function HomePage() {
                 <button className="bg-white font-bold text-indigo-600 px-6 py-3 rounded-lg hover:bg-gray-100 transition">
                   Browse Tools
                 </button>
-                <button href="/auth/register" className="bg-transparent border-2 border-white px-6 py-3 rounded-lg font-bold hover:bg-white/10 transition">
+                <button
+                  href="/auth/register"
+                  className="bg-transparent border-2 border-white px-6 py-3 rounded-lg font-bold hover:bg-white/10 transition"
+                >
                   Become a Seller
                 </button>
               </div>

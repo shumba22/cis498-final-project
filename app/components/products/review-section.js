@@ -24,7 +24,7 @@ export default function ReviewSection({ reviews }) {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={i < r.rating ? 'text-yellow-400' : 'text-gray-300'}
+                  className={i < r.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}
                 />
               ))}
             </div>

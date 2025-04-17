@@ -1,9 +1,13 @@
-import { prisma } from "@/prisma/client";
 import ProductFilters from "@/components/products/product-filters";
 import ProductCard from "@/components/products/product-card";
+import SearchBar from "@/components/ui/search-bar";
+import { PRODUCT_QUERIES } from "@/lib/db/actions";
 
 export default async function ProductsPage({ searchParams }) {
-  const selectedCategory = (await searchParams.category) || "all";
+  const { category, search } = searchParams;
+  const selectedCategory = category ?? "all";
+  const searchTerm = search ?? "";
+  const searchTermLower = searchTerm.toLowerCase();
 
   const categories = [
     { id: "all", name: "All Tools" },
@@ -14,14 +18,10 @@ export default async function ProductsPage({ searchParams }) {
   ];
 
   // 3) fetch products, include reviews + seller for metrics
-  const productsData = await prisma.product.findMany({
-    where: selectedCategory !== "all" ? { category: selectedCategory } : {},
-    include: {
-      reviews: { select: { rating: true } },
-      seller: { select: { name: true } },
-    },
-    orderBy: { createdAt: "desc" },
-  });
+  const productsData = await PRODUCT_QUERIES.getAllProductsWithReviews(
+    selectedCategory,
+    searchTermLower
+  );
 
   // 4) compute avgRating, count & expose sellerName
   const products = productsData.map((p) => {
@@ -49,6 +49,9 @@ export default async function ProductsPage({ searchParams }) {
           {selectedCategory === "all" ? "All Tools" : selectedCategory}
         </h1>
         {/* client‐side filter UI */}
+        <div className="mb-4 mt-12">
+          <SearchBar />
+        </div>
         <ProductFilters
           categories={categories}
           selectedCategory={selectedCategory}

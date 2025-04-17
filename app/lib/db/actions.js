@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/client";
+import { prisma } from "@/prisma/client";
 
 export const USER_QUERIES = {
   getByEmail: (email) => prisma.user.findUnique({ where: { email } }),
@@ -67,7 +67,7 @@ export const PRODUCT_QUERIES = {
       where: {
         orderItems: { some: { order: { orderDate: { gte: thirtyDaysAgo } } } },
       },
-      orderBy: { orderItems: { _count: 'desc' } },
+      orderBy: { orderItems: { _count: "desc" } },
       take: limit,
       include: {
         reviews: { select: { rating: true } },
@@ -79,9 +79,7 @@ export const PRODUCT_QUERIES = {
     return products.map((p) => {
       const count = p.reviews.length;
       const avg =
-        count > 0
-          ? p.reviews.reduce((sum, r) => sum + r.rating, 0) / count
-          : 0;
+        count > 0 ? p.reviews.reduce((sum, r) => sum + r.rating, 0) / count : 0;
       return {
         ...p,
         seller: p.seller.name,
@@ -91,7 +89,7 @@ export const PRODUCT_QUERIES = {
     });
   },
 
-  getProductDetailsWithReviews : async (id) => {
+  getProductDetailsWithReviews: async (id) => {
     const product = await prisma.product.findUnique({
       where: { id },
       include: {
@@ -104,7 +102,7 @@ export const PRODUCT_QUERIES = {
             createdAt: true,
             reviewer: { select: { name: true } },
           },
-          orderBy: { createdAt: 'desc' },
+          orderBy: { createdAt: "desc" },
         },
       },
     });
@@ -125,5 +123,22 @@ export const PRODUCT_QUERIES = {
       avgRating: avg,
       reviewsCount: count,
     };
-  }
+  },
+  getAllProductsWithReviews: async (selectedCategory, searchTerm) => {
+    console.log("Fetching all products with reviews...");
+    return await prisma.product.findMany({
+      where: {
+        ...(selectedCategory !== "all" ? { category: selectedCategory } : {}),
+        AND: [
+          { name: { contains: searchTerm, mode: "insensitive" } },
+          { description: { contains: searchTerm, mode: "insensitive" } },
+        ],
+      },
+      include: {
+        reviews: { select: { rating: true } },
+        seller: { select: { name: true } },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  },
 };
