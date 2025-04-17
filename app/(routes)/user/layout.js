@@ -36,9 +36,7 @@ export default function DashboardLayout({ children }) {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* sidebar */}
           <aside className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8 space-y-6">
-              {/* user‑info component */}
-              {/* <UserInfo user={user} /> */}
+            <div className="bg-white rounded-lg shadow-md p-6 top-8 space-y-6">
 
               <nav className="space-y-1">
                 {tabs.map(({ href, label, icon: Icon }) => (

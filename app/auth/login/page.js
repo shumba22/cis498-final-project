@@ -31,7 +31,8 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/dashboard");
+      router.push("/homepage");
+      setIsLoading(false);
     } catch (error) {
       setError("Something went wrong. Please try again.");
       setIsLoading(false);

@@ -33,7 +33,7 @@ export default function ReviewsTab({ reviews }) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-white p-4 rounded-lg shadow-sm">
       {reviews.map((review) => (
         <div key={review.id} className="border-b border-gray-100 pb-6">
           <div className="flex justify-between mb-2">

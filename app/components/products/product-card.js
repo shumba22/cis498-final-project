@@ -38,7 +38,7 @@ export default function ProductCard({ key, tool }) {
         <p className="text-gray-600 text-sm mb-3">{tool.description}</p>
         <div className="flex items-center text-sm text-gray-500 mb-4">
           <Star className="h-4 w-4 text-yellow-400 mr-1" />
-          <span>{tool.avgRating.toFixed(1)}</span>
+          <span>{tool.avgRating}</span>
           <span className="mx-2">•</span>
           <span>{tool.seller}</span>
         </div>

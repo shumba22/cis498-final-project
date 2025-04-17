@@ -15,7 +15,15 @@ export function NavBar() {
 
   const handleButtonClick = () => {
     if (status === "authenticated") {
-      router.push("/user");
+      if (user.user.role === "BUSINESS") {
+        router.push("/business");
+      }
+      if (user.user.role === "USER") {
+        router.push("/user");
+      }
+      if (user.user.role === "ADMIN") {
+        router.push("/admin");
+      }
     } else {
       router.push("/auth/login");
     }

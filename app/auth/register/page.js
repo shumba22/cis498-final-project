@@ -74,7 +74,7 @@ export default function RegisterPage() {
 
       // Redirect to appropriate dashboard
       // Note: Consider redirecting based on the actual role returned in signInResult or session, not just accountType state
-      router.push(accountType === "BUSINESS" ? "/business/dashboard" : "/dashboard"); // Adjust target routes if needed
+      router.push(accountType === "BUSINESS" ? "/business/dashboard" : "/homepage"); // Adjust target routes if needed
 
     } catch (error) {
       setError(error.message || "Something went wrong. Please try again.");
@@ -227,8 +227,8 @@ export default function RegisterPage() {
 
             {/* Business-specific Fields */}
             {accountType === "BUSINESS" && (
-              <div className="space-y-4 mt-4 pt-4 border-t border-gray-200">
-                <h3 className="text-lg font-medium text-gray-900">Business Information</h3>
+              <div className="space-y-4 mt-4 pt-4 border-t text-gray-900 border-gray-200">
+                <h3 className="text-lg font-medium ">Business Information</h3>
                 <div>
                   <label htmlFor="businessName" className="block text-sm font-medium text-gray-700 mb-1">
                     Business Name
