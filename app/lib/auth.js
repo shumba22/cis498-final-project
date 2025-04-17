@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import QUERIES from "@/lib/db/actions";
+import { USER_QUERIES } from "@/lib/db/actions";
 
 const prisma = new PrismaClient();
 
@@ -26,7 +26,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
-        const user = await QUERIES.getByEmail(credentials.email);
+        const user = await USER_QUERIES.getByEmail(credentials.email);
 
         if (!user || !user.password) {
           return null;
@@ -63,7 +63,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token }) {
       if (!token.sub) return token;
 
-      const existingUser = await QUERIES.getById(token.sub);
+      const existingUser = await USER_QUERIES.getById(token.sub);
 
       if (!existingUser) return token;
 

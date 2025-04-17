@@ -39,7 +39,7 @@ export default function LoginPage() {
   };
 
   const handleGithubSignIn = () => {
-    signIn("github", { callbackUrl: "/dashboard" });
+    signIn("github", { callbackUrl: "/homepage" });
   };
 
   return (
