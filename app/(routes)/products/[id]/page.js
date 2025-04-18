@@ -3,7 +3,7 @@ import ReviewSection from "@/components/products/review-section";
 import { PRODUCT_QUERIES } from "@/lib/db/actions";
 
 export default async function ProductPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const raw = await PRODUCT_QUERIES.getProductDetailsWithReviews(id);
 
   if (!raw) {
@@ -23,6 +23,7 @@ export default async function ProductPage({ params }) {
     category: raw.category,
     url: raw.url,
     status: raw.status,
+    mainImage: raw.mainImage,
     createdAt: raw.createdAt.toISOString(), // Date → string
     updatedAt: raw.updatedAt.toISOString(),
     seller: { name: raw.sellerName }, // nest back for ProductDetails

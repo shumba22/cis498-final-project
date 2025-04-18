@@ -20,7 +20,7 @@ export default function BusinessOverview({ business }) {
   ).length;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 space-y-6">
+    <div className="bg-white rounded-lg shadow-sm p-4 space-y-6">
       <h2 className="text-2xl font-semibold">{business.name} Dashboard</h2>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <div className="p-4 bg-indigo-50 rounded">

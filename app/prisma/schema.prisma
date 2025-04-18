@@ -107,7 +107,8 @@ model Product {
   
   sellerId    String    @map("seller_id")
   seller      Business  @relation(fields: [sellerId], references: [id], onDelete: Cascade)
-  
+  mainImage   String?   @map("main_image")
+
   orderItems  OrderItem[]
   reviews     Review[]
 

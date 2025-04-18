@@ -38,7 +38,8 @@ export default async function ProductsPage({ searchParams }) {
       price: p.price.toString(),
       category: p.category,
       url: p.url,
-      avgRating: avg,
+      mainImage: p.mainImage,
+      avgRating: avg.toFixed(2),
       reviewsCount: count,
       seller: p.seller.name,
     };

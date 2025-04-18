@@ -18,6 +18,15 @@ export const BUSINESS_QUERIES = {
       },
     });
   },
+  getNameAndDescription: async (businessId) => {
+    return prisma.business.findUnique({
+      where: {id: businessId},
+      select: {
+        name: true,
+        description: true,
+      }
+    })
+  },
   updateBusiness: async (id, name, description) => {
     await prisma.business.update({
       where: { id },
@@ -45,7 +54,7 @@ export const BUSINESS_QUERIES = {
     // 2) flatten out one array of order‑records
     return biz.products.flatMap((p) =>
       p.orderItems.map((oi) => ({
-        id: oi.order.id,
+        id: oi.id,
         orderDate: oi.order.orderDate,
         buyerName: oi.order.buyer.name,
         total: oi.order.amount.toString(),
