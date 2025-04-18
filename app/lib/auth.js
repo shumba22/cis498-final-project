@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { USER_QUERIES } from "./db/actions";
+import { USER_QUERIES, BUSINESS_QUERIES } from "./db/actions";
 
 const prisma = new PrismaClient();
 
@@ -49,26 +49,38 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
+    async jwt({ token, user }) {
+      // on initial sign in, `user` is available
+      if (user) {
+        token.role = user.role;
+        if (user.role === "BUSINESS") {
+          // load business record for this user
+          const biz = await BUSINESS_QUERIES.getById(user.id);
+          token.businessName = biz?.name;
+          token.businessId = biz?.id;
+        }
+      }
+      // for all other calls, keep your existing logic
+      if (token.sub) {
+        const existing = await USER_QUERIES.getById(token.sub);
+        if (existing) token.role = existing.role;
+      }
+      return token;
+    },
+
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
-      }
-
-      if (token.role && session.user) {
         session.user.role = token.role;
+        // pass through businessName if present
+        if (token.businessName) {
+          session.user.businessName = token.businessName;
+        }
+        if (token.businessId) {
+          session.user.businessId = token.businessId;
+        }
       }
-
       return session;
-    },
-    async jwt({ token }) {
-      if (!token.sub) return token;
-
-      const existingUser = await USER_QUERIES.getById(token.sub);
-
-      if (!existingUser) return token;
-
-      token.role = existingUser.role;
-      return token;
     },
   },
   pages: {

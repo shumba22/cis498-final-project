@@ -14,8 +14,8 @@ export default function BusinessSettingsForm({ initialData }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6">
-      <h2 className="text-xl font-bold mb-4">Business Settings</h2>
+    <div className="bg-white rounded-lg shadow-sm p-4 space-y-6">
+      <h2 className="text-2xl font-bold">Business Settings</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700">Business Name</label>

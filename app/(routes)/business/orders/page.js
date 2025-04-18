@@ -8,11 +8,11 @@ export default async function OrdersPage() {
   if (!session?.user || session.user.role !== "BUSINESS") {
     redirect("/auth/login");
   }
-
-  const { id } = await BUSINESS_QUERIES.getById(session.user.id);
-  if (id === null) {
+  const id = session.user.businessId;
+  if (!id) {
     redirect("/auth/login");
   }
   const orders = await BUSINESS_QUERIES.getOrdersForBusiness(id);
+  console.log("Orders for business:", orders);
   return <BusinessOrdersTab orders={orders} />;
 }

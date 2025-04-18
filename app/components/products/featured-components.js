@@ -11,7 +11,8 @@ export default async function FeaturedProducts() {
     price: p.price.toString(), // Decimal → string (or p.price.toNumber())
     category: p.category,
     url: p.url,
-    avgRating: p.avgRating,
+    mainImage: p.mainImage,
+    avgRating: p.avgRating.toFixed(1),
     reviewsCount: p.reviewsCount,
     seller: p.seller, // already a string
   }));

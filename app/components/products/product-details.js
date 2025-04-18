@@ -17,7 +17,7 @@ export default function ProductDetails({ product }) {
       {/* Image */}
       <div className="flex-1">
         <img
-          src={product.url ?? '/api/placeholder/600/400'}
+          src={product.mainImage ?? '/api/placeholder/600/400'}
           alt={product.name}
           className="w-full h-auto rounded-lg shadow-lg object-cover"
         />

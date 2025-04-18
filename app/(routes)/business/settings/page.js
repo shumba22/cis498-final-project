@@ -8,6 +8,6 @@ export default async function SettingsPage() {
   if (!session?.user || session.user.role !== "BUSINESS") {
     redirect("/auth/login");
   }
-  const business = await BUSINESS_QUERIES.getById(session.user.id);
+  const business = await BUSINESS_QUERIES.getNameAndDescription(session.user.businessId);
   return <BusinessSettingsForm initialData={business} />;
 }
