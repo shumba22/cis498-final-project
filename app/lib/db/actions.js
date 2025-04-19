@@ -228,6 +228,32 @@ export const USER_QUERIES = {
       },
     });
   },
+  getOrderForUser: (userId, orderId) => {
+    return prisma.order.findFirst({
+      where: { id: orderId, buyerId: userId },
+      select: {
+        id: true,
+        orderDate: true,
+        amount: true,
+        paymentStatus: true,
+        orderItems: {
+          select: {
+            id: true,
+            quantity: true,
+            price: true,
+            product: {
+              select: {
+                id: true,
+                name: true,
+                mainImage: true,
+                price: true,
+              },
+            },
+          },
+        },
+      },
+    })
+  },
 
   getAllUserInfo: async (userId) => {
     const user = await prisma.user.findUnique({
