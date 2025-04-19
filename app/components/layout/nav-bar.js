@@ -2,7 +2,7 @@
 
 import { FaBars, FaUser } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 
@@ -31,8 +31,9 @@ export function NavBar() {
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
-    router.push("/");
+    router.replace('/homepage');
   };
+
 
   return (
     <nav className="bg-white shadow-sm">

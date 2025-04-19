@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import BusinessSidebar from "@/components/business/business-sidebar";
 import { BusinessProvider } from "@/components/business/business-context";
 import { BUSINESS_QUERIES } from "@/lib/db/actions";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({ children }) {
   const session = await auth();
