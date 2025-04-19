@@ -1,3 +1,5 @@
+'use client';
+
 import BusinessProductsTab from "@/components/business/business-products";
 import { useBusiness } from "@/components/business/business-context";
 import { useRouter } from "next/navigation";

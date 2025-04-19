@@ -1,3 +1,5 @@
+'use client'
+
 import BusinessSettingsForm from "@/components/business/business-settings";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -15,6 +17,6 @@ export default function SettingsPage() {
   } , [business, router]);
 
   console.log("Business settings:", business);
-  
+
   return <BusinessSettingsForm initialData={business} />;
 }
