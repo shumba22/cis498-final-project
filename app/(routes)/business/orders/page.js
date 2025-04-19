@@ -1,18 +1,20 @@
-import { auth } from "@/lib/auth";
-import { BUSINESS_QUERIES } from "@/lib/db/actions";
 import BusinessOrdersTab from "@/components/business/business-orders";
-import { redirect } from "next/navigation";
+import { useBusiness } from "@/components/business/business-context";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default async function OrdersPage() {
-  const session = await auth();
-  if (!session?.user || session.user.role !== "BUSINESS") {
-    redirect("/auth/login");
+export default function OrdersPage() {
+  const { business } = useBusiness()
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!business) {
+      console.log("Business not found, redirecting to login.");
+      router.push("/auth/login");
+    }
   }
-  const id = session.user.businessId;
-  if (!id) {
-    redirect("/auth/login");
-  }
-  const orders = await BUSINESS_QUERIES.getOrdersForBusiness(id);
-  console.log("Orders for business:", orders);
-  return <BusinessOrdersTab orders={orders} />;
+  , [business, router]);
+
+  console.log("Orders for business:", business.orders);
+  return <BusinessOrdersTab orders={business.orders} />;
 }

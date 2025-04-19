@@ -1,18 +1,22 @@
-import { auth } from "@/lib/auth";
-import { BUSINESS_QUERIES } from "@/lib/db/actions";
+'use client';
+
 import BusinessOverview from "@/components/business/business-overview";
-import { redirect } from "next/navigation";
+import { useBusiness } from "@/components/business/business-context";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export default async function DashboardIndex() {
-  const session = await auth();
-  if (!session?.user || session.user.role !== "BUSINESS") {
-    redirect("/auth/login");
-  }
-  const business = await BUSINESS_QUERIES.getById(session.user.id);
+export default function OverviewPage() {
+  const { business } = useBusiness();
+  const router = useRouter();
 
-  if (!business) {
-    redirect("/auth/login");
-  }
+  useEffect(() => {
+    if (!business) {
+      console.log("Business not found, redirecting to login.");
+      router.push("/auth/login");
+    }
+  } , [business, router]);
+
+  console.log("Business overview:", business);
 
   return <BusinessOverview business={business} />;
 }

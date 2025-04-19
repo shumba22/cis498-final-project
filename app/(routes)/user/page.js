@@ -1,20 +1,12 @@
-"use client";
+import { redirect } from 'next/navigation'
+import { auth } from '@/lib/auth'
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+export default async function UserIndex() {
+  const session = await auth()
 
-export default function UserIndex() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      console.log("Redirecting..., user:", session);
-      router.replace(`/user/profile`);
-    } else if (status === "unauthenticated") {
-      console.log("User is unauthenticated, redirecting to login.");
-      router.replace("/auth/login");
-    }
-  }, [status]);
+  if (!session.user) {
+    console.log('User not authenticated')
+    return redirect('/auth/login')
+  }
+  return redirect('/user/profile')
 }

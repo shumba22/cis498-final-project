@@ -20,12 +20,12 @@ export const BUSINESS_QUERIES = {
   },
   getNameAndDescription: async (businessId) => {
     return prisma.business.findUnique({
-      where: {id: businessId},
+      where: { id: businessId },
       select: {
         name: true,
         description: true,
-      }
-    })
+      },
+    });
   },
   updateBusiness: async (id, name, description) => {
     await prisma.business.update({
@@ -62,6 +62,122 @@ export const BUSINESS_QUERIES = {
         quantity: oi.quantity,
       }))
     );
+  },
+
+  getAllBusinessInfo: async (id) => {
+    // 1) Fetch via select
+    const biz = await prisma.business.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        status: true,
+        products: {
+          select: {
+            id: true,
+            name: true,
+            mainImage: true,
+            price: true,
+            category: true,
+            status: true,
+            // nested reviews on each product
+            reviews: {
+              select: {
+                id: true,
+                rating: true,
+                comment: true,
+                createdAt: true,
+              },
+            },
+            // nested sales for each product
+            orderItems: {
+              select: {
+                id: true,
+                quantity: true,
+                price: true,
+                order: {
+                  select: {
+                    id: true,
+                    orderDate: true,
+                    amount: true,
+                    paymentStatus: true,
+                    buyer: {
+                      select: {
+                        id: true,
+                        name: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        supportRequests: {
+          select: {
+            id: true,
+            subject: true,
+            status: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
+    });
+    if (!biz) return null;
+
+    // 2) Convert Decimal → string on products and reviews
+    const products = biz.products.map((p) => ({
+      id: p.id,
+      name: p.name,
+      mainImage: p.mainImage,
+      price: p.price.toString(),
+      category: p.category,
+      status: p.status,
+      reviews: p.reviews.map((r) => ({
+        id: r.id,
+        rating: r.rating.toString(),
+        comment: r.comment,
+        createdAt: r.createdAt,
+      })),
+    }));
+
+    // 3) Flatten all orderItems into a single `orders` array
+    const orders = biz.products.flatMap((p) =>
+      p.orderItems.map((oi) => ({
+        orderItemId: oi.id,
+        orderId: oi.order.id,
+        orderDate: oi.order.orderDate,
+        buyerId: oi.order.buyer.id,
+        buyerName: oi.order.buyer.name,
+        productId: p.id,
+        productName: p.name,
+        quantity: oi.quantity,
+        price: oi.price.toString(),
+        total: oi.order.amount.toString(),
+        paymentStatus: oi.order.paymentStatus,
+      }))
+    );
+
+    // 4) Support requests as-is
+    const supportRequests = biz.supportRequests.map((sr) => ({
+      id: sr.id,
+      subject: sr.subject,
+      status: sr.status,
+      createdAt: sr.createdAt,
+      updatedAt: sr.updatedAt,
+    }));
+
+    return {
+      id: biz.id,
+      name: biz.name,
+      description: biz.description,
+      status: biz.status,
+      products,
+      orders,
+      supportRequests,
+    };
   },
 };
 
@@ -111,7 +227,95 @@ export const USER_QUERIES = {
         supportRequests: true,
       },
     });
-  }
+  },
+
+  getAllUserInfo: async (userId) => {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        orders: {
+          select: {
+            id: true,
+            orderDate: true,
+            amount: true,
+            paymentStatus: true,
+            orderItems: {
+              select: {
+                id: true,
+                quantity: true,
+                price: true,
+                product: {
+                  select: {
+                    id: true,
+                    name: true,
+                    mainImage: true,
+                    price: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        reviews: {
+          select: {
+            id: true,
+            rating: true,
+            comment: true,
+            createdAt: true,
+            product: {
+              select: {
+                id: true,
+                name: true,
+                mainImage: true,
+                price: true,
+              },
+            },
+          },
+        },
+        supportRequests: {
+          select: {
+            id: true,
+            subject: true,
+            status: true,
+            createdAt: true,
+          },
+        },
+      },
+    });
+    // Remove decimals from order amounts, price, and review rating
+    if (user && user.orders) {
+      user.orders = user.orders.map((order) => {
+        return {
+          ...order,
+          amount: order.amount.toString(),
+          orderItems: order.orderItems.map((item) => ({
+            ...item,
+            price: item.price.toString(),
+            product: {
+              ...item.product,
+              price: item.product.price.toString(),
+            },
+          })),
+        };
+      });
+    }
+
+    if (user && user.reviews) {
+      user.reviews = user.reviews.map((review) => ({
+        ...review,
+        rating: review.rating.toString(),
+        product: {
+          ...review.product,
+          price: review.product.price.toString(),
+        },
+      }));
+    }
+
+    return user;
+  },
 };
 
 export const USER_MUTATIONS = {

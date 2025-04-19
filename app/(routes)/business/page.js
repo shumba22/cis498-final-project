@@ -1,25 +1,22 @@
-"use client";
+import { redirect } from 'next/navigation'
+import { auth } from '@/lib/auth'
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+export default async function BusinessIndex() {
+  const session = await auth()
 
-export default function BusinessIndex() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  if (!session.user) {
+    console.log('User not authenticated')
+    return redirect('/auth/login')
+  }
 
-  useEffect(() => {
-    if (session.user.role !== "BUSINESS") {
-      console.log("User is not a business, redirecting to homepage.");
-      router.replace("/homepage");
-    }
-
-    if (status === "authenticated") {
-      console.log("Redirecting..., user:", session);
-      router.replace(`/business/overview/`);
-    } else if (status === "unauthenticated") {
-      console.log("User is unauthenticated, redirecting to login.");
-      router.replace("/auth/login");
-    }
-  }, [session, status]);
+  if (!session.user.business) {
+    console.log('User not a business')
+    return redirect('/auth/login')
+  }
+  if (!session.user.business.active) {
+    console.log('User business not active')
+    return redirect('/auth/login')
+  }
+  
+  return redirect('/business/dashboard')
 }

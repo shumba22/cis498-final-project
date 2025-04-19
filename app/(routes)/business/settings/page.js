@@ -1,13 +1,20 @@
-import { auth } from "@/lib/auth";
-import { BUSINESS_QUERIES } from "@/lib/db/actions";
 import BusinessSettingsForm from "@/components/business/business-settings";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useBusiness } from "@/components/business/business-context";
 
-export default async function SettingsPage() {
-  const session = await auth();
-  if (!session?.user || session.user.role !== "BUSINESS") {
-    redirect("/auth/login");
-  }
-  const business = await BUSINESS_QUERIES.getNameAndDescription(session.user.businessId);
+export default function SettingsPage() {
+  const { business } = useBusiness();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!business) {
+      console.log("Business not found, redirecting to login.");
+      router.replace("/auth/login");
+    }
+  } , [business, router]);
+
+  console.log("Business settings:", business);
+  
   return <BusinessSettingsForm initialData={business} />;
 }
