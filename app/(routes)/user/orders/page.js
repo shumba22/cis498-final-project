@@ -1,16 +1,21 @@
-import { auth } from "@/lib/auth";
+"use client";
+
 import OrdersTab from "@/components/user/user-orders";
-import { redirect } from "next/navigation";
-import { USER_QUERIES } from "@/lib/db/actions";
+import { useUser } from "@/components/user/user-context";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default async function ProfilePage() {
-  const session = await auth();
+export default function OrdersPage() {
+  const { user } = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      console.log("User not found, redirecting to login.");
+      router.replace("/auth/login");
+    }
+  }, [user, router]);
 
-  if (!session?.user) {
-    redirect("/auth/login");
-  }
-
-  const user = await USER_QUERIES.getUserOrders(session.user.id);
   console.log("User orders:", user.orders);
-  return (<OrdersTab orders={user.orders} />);
+
+  return <OrdersTab orders={user.orders} />;
 }

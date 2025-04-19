@@ -1,18 +1,20 @@
-import { auth } from "@/lib/auth";
+'use client';
+
 import ReviewsTab from "@/components/user/user-reviews";
-import { redirect } from "next/navigation";
-import { USER_QUERIES } from "@/lib/db/actions";
+import { useUser } from "@/components/user/user-context";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default async function ReviewsPage() {
-  const session = await auth();
+export default function ReviewsPage() {
+  const { user } = useUser();
+  const router = useRouter();
 
-  if (!session?.user) {
-    redirect("/auth/login");
-  }
-
-  const user = await USER_QUERIES.getReviews(session.user.id);
-
-  console.log("User reviews:", user.reviews);
+  useEffect(() => {
+    if (!user) {
+      console.log("User not found, redirecting to login.");
+      router.replace("/auth/login");
+    }
+  }, [user, router]);
 
   return (<ReviewsTab reviews={user.reviews} />);
 }
