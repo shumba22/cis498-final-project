@@ -19,7 +19,7 @@ export default function ProductCard({ tool }) {
           fill
           className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
         />
-        <span className="absolute top-2 left-2 bg-indigo-600 text-white text-xs font-semibold px-2 py-1 rounded">
+        <span className="absolute top-2 left-2 bg-[#FF4500] text-white text-xs font-semibold px-2 py-1 rounded">
           {tool.category}
         </span>
       </div>
@@ -44,7 +44,7 @@ export default function ProductCard({ tool }) {
           e.stopPropagation();
           console.log(`${tool.name} added to cart`);
         }}
-        className="absolute bottom-3 right-3 bg-indigo-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute bottom-3 right-3 bg-[#FF4500] text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
       >
         <FiShoppingCart className="h-5 w-5" />
       </button>

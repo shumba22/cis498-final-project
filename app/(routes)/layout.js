@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react";
 
 export default function Layout({ children }) {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-700">
+    <div className="flex flex-col min-h-screen bg-[#F8F8F8] text-[#000000] font-mono">
       <SessionProvider>
         <NavBar />
         {children}

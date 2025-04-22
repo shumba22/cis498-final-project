@@ -21,9 +21,9 @@ export default async function DashboardLayout({ children }) {
 
   return (
     <UserProvider user={userData}>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#F8F8F8]">
         {/* header/banner */}
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-12">
+        <div className="bg-gradient-to-r from-orange-200 to-[#F8F8F8] text-white py-12">
           <div className="container mx-auto px-4">
             <h1 className="text-3xl font-bold">Your Dashboard</h1>
             <p className="opacity-90">Manage your profile, orders, reviews…</p>

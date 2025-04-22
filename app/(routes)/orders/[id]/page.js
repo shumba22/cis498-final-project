@@ -35,7 +35,7 @@ export default async function OrderDetailPage({ params: { orderId } }) {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-gray-50">
+    <div className="container mx-auto px-4 py-8 bg-[#F8F8F8]">
       <h1 className="text-2xl font-bold mb-6">
         Order #{order.id.substring(0, 8)}
       </h1>
@@ -50,7 +50,7 @@ export default async function OrderDetailPage({ params: { orderId } }) {
               {["Product", "Qty", "Unit Price", "Subtotal"].map((label) => (
                 <th
                   key={label}
-                  className="text-left px-4 py-2 text-sm font-medium text-gray-600"
+                  className="text-left px-4 py-2 text-sm font-medium text-[#666666]"
                 >
                   {label}
                 </th>

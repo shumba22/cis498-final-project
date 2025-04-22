@@ -60,7 +60,7 @@ export default function ReviewsTab({ reviews }) {
               <FiEdit className="inline-block" />
             </a>
           </div>
-          <p className="text-gray-600 mt-2">{review.comment}</p>
+          <p className="text-[#666666] mt-2">{review.comment}</p>
         </div>
       ))}
     </div>

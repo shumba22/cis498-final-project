@@ -13,7 +13,7 @@ export default function CategorySelector({
             key={category.id}
             className={`px-5 py-2 rounded-full ${
               selectedCategory === category.id
-                ? "bg-indigo-600 text-white"
+                ? "bg-[#FF4500] text-white"
                 : "bg-white text-gray-700 border border-gray-200 hover:border-indigo-600"
             } transition`}
             onClick={() => onSelect(category.id)}

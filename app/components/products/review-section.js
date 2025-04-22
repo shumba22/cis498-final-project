@@ -28,7 +28,7 @@ export default function ReviewSection({ reviews }) {
                 />
               ))}
             </div>
-            <p className="text-gray-600">{r.comment}</p>
+            <p className="text-[#666666]">{r.comment}</p>
           </div>
         ))}
       </div>

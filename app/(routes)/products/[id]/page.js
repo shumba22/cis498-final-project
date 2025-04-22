@@ -39,7 +39,7 @@ export default async function ProductPage({ params }) {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-12 bg-gray-50">
+    <div className="container mx-auto px-4 py-8 space-y-12 bg-[#F8F8F8]">
       {/* 1) Product Details */}
       <ProductDetails product={product} />
 

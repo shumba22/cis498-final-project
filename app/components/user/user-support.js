@@ -24,7 +24,7 @@ export default function SupportTab({ supportRequests }) {
         <p className="text-gray-500">You don't have any support requests.</p>
         <a 
           href="/support/new" 
-          className="inline-block mt-4 bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
+          className="inline-block mt-4 bg-[#FF4500] text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
         >
           Create Support Request
         </a>
@@ -52,7 +52,7 @@ export default function SupportTab({ supportRequests }) {
             </div>
           </div>
           
-          <p className="text-sm text-gray-600 line-clamp-2 mb-2">
+          <p className="text-sm text-[#666666] line-clamp-2 mb-2">
             {request.message}
           </p>
           
