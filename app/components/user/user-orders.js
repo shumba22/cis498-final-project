@@ -16,7 +16,7 @@ export default function OrdersTab({ orders }) {
         <p className="text-gray-500">You haven't made any purchases yet.</p>
         <a
           href="/products"
-          className="inline-block mt-4 bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
+          className="inline-block mt-4 bg-[#FF4500] text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
         >
           Browse Products
         </a>
@@ -53,15 +53,15 @@ export default function OrdersTab({ orders }) {
           {orders.map((order) => (
             <tr
               key={order.id}
-              className="border-b border-gray-100 hover:bg-gray-50 text-gray-600"
+              className="border-b border-gray-100 hover:bg-[#F8F8F8] text-[#666666]"
             >
               <td className="py-3 px-2 text-sm font-medium">
                 #{order.id.substring(0, 8)}
               </td>
-              <td className="py-3 px-2 text-md text-gray-600">
+              <td className="py-3 px-2 text-md text-[#666666]">
                 {formatDate(order.orderDate)}
               </td>
-              <td className="py-3 px-2 text-md font-medium text-gray-600">
+              <td className="py-3 px-2 text-md font-medium text-[#666666]">
                 ${Number(order.amount).toFixed(2)}
               </td>
               <td className="py-3 px-2">
@@ -77,7 +77,7 @@ export default function OrdersTab({ orders }) {
                   {order.paymentStatus}
                 </span>
               </td>
-              <td className="py-3 px-2 text-sm text-gray-600">
+              <td className="py-3 px-2 text-sm text-[#666666]">
                 {order.orderItems.length} items
               </td>
               <td className="py-3 px-2 text-right">

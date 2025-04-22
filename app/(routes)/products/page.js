@@ -46,7 +46,7 @@ export default async function ProductsPage({ searchParams }) {
   });
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-[#F8F8F8]">
       <section className="container mx-auto px-4 py-8">
 
         <div className="mb-4 mt-12">
