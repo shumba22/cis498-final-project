@@ -10,6 +10,20 @@ export function NavBar() {
   const { data: user, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+    console.log("User logged in status:", isLoggedIn);
+  }, [status]);
+
+  useEffect(() => {
+
+  }, [isLoggedIn]);
 
   console.log("User session data:", user);
   console.log("User session status:", status);
@@ -33,7 +47,8 @@ export function NavBar() {
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
-    router.replace("/homepage");
+    setIsLoggedIn(false);
+    router.push("/homepage");
   };
 
   return (
