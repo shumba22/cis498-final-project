@@ -4,7 +4,7 @@ import ErrorDetails from "./error-details";
 
 export default function ErrorPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#F8F8F8] py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
           <h1 className="text-center text-4xl font-extrabold text-gray-900">
@@ -36,7 +36,7 @@ export default function ErrorPage() {
 
           <Link
             href="/auth/register"
-            className="group relative flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="group relative flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-[#F8F8F8] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Create an account
           </Link>

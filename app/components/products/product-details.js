@@ -26,7 +26,7 @@ export default function ProductDetails({ product }) {
       {/* Details */}
       <div className="flex-1 space-y-6">
         <h1 className="text-4xl font-bold text-gray-800">{product.name}</h1>
-        <p className="text-gray-600">{product.description}</p>
+        <p className="text-[#666666]">{product.description}</p>
         <div className="flex items-center space-x-4">
           <span className="text-3xl font-extrabold text-indigo-600">
             ${product.price.toFixed(2)}
@@ -55,7 +55,7 @@ export default function ProductDetails({ product }) {
 
         <button
           onClick={handleAddToCart}
-          className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
+          className="bg-[#FF4500] text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
         >
           Add to Cart
         </button>

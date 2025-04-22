@@ -4,12 +4,12 @@ export default function BusinessOrdersTab({ orders }) {
       <h2 className="text-2xl font-bold mb-4">Orders</h2>
       <div className="overflow-x-auto bg-white shadow rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="bg-[#F8F8F8]">
             <tr>
               {["Date", "Buyer", "Product", "Qty", "Total"].map((label) => (
                 <th
                   key={label}
-                  className="sticky top-0 px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  className="sticky top-0 px-6 py-3 text-left text-xs font-semibold text-[#666666] uppercase tracking-wider"
                 >
                   {label}
                 </th>
@@ -20,7 +20,7 @@ export default function BusinessOrdersTab({ orders }) {
             {orders.map((o, i) => (
               <tr
                 key={o.id}
-                className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                className={i % 2 === 0 ? "bg-white" : "bg-[#F8F8F8]"}
               >
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                   {new Date(o.orderDate).toLocaleDateString()}

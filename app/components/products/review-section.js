@@ -66,6 +66,7 @@ export default function ReviewSection({ reviews }) {
                 <TrashIcon />
               </button>
             )}
+
           </div>
         ))}
       </div>

@@ -24,7 +24,7 @@ export default function SearchBar() {
   return (
     <div className="container mx-auto px-4 -mt-6">
       <div className="bg-white rounded-lg shadow-lg p-4 flex">
-        <div className="flex-grow flex items-center border rounded-l-lg px-4 bg-gray-50">
+        <div className="flex-grow flex items-center border rounded-l-lg px-4 bg-[#F8F8F8]">
           <Search className="h-5 w-5 text-gray-400" />
           <input
             type="text"
@@ -40,7 +40,7 @@ export default function SearchBar() {
             className="w-full p-2 bg-transparent focus:outline-none text-gray-700"
           />
         </div>
-        <button className="bg-indigo-600 text-white px-6 py-2 rounded-r-lg hover:bg-indigo-700 transition">
+        <button className="bg-[#FF4500] text-white px-6 py-2 rounded-r-lg hover:bg-indigo-700 transition">
           Search
         </button>
       </div>

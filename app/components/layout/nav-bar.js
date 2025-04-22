@@ -46,7 +46,7 @@ export function NavBar() {
           </div>
           {/* Desktop Navigation */}
           <div className="hidden md:flex flex-1 justify-center items-center space-x-4">
-            <a href="/products" className="text-gray-600 hover:text-gray-900 absolute left-1/2 transform -translate-x-1/2">
+            <a href="/products" className="text-[#666666] hover:text-gray-900 absolute left-1/2 transform -translate-x-1/2">
               Products
             </a>
           </div>
@@ -54,7 +54,7 @@ export function NavBar() {
             <div className="hidden md:flex items-center">
               <button
                 onClick={handleButtonClick}
-                className="flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 hover:cursor-pointer"
+                className="flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#FF4500] hover:bg-indigo-700 hover:cursor-pointer"
               >
                 {status === "authenticated" ? (
                   <>
@@ -103,7 +103,7 @@ export function NavBar() {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <a
                 href="/products"
-                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                className="block px-3 py-2 text-[#666666] hover:text-gray-900 hover:bg-[#F8F8F8] rounded-md"
               >
                 Products
               </a>
@@ -111,7 +111,7 @@ export function NavBar() {
               <div className="flex flex-row justify-center">
                 <button
                   onClick={handleButtonClick}
-                  className="mt-4 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md"
+                  className="mt-4 px-4 py-2 text-sm font-medium text-white bg-[#FF4500] hover:bg-indigo-700 rounded-md"
                 >
                   {status === "authenticated" ? (
                     <div className="flex flex-row items-center">

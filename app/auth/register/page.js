@@ -87,7 +87,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#F8F8F8] py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
           <h1 className="text-center text-4xl font-extrabold text-gray-900">
@@ -96,7 +96,7 @@ export default function RegisterPage() {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Create your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-[#666666]">
             Or{" "}
             <Link 
               href="/auth/login" 
@@ -278,7 +278,7 @@ export default function RegisterPage() {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-gray-50 px-2 text-gray-500">
+              <span className="bg-[#F8F8F8] px-2 text-gray-500">
                 Or continue with
               </span>
             </div>
@@ -287,7 +287,7 @@ export default function RegisterPage() {
           <div className="mt-6">
             <button
               onClick={handleGithubSignIn}
-              className="group relative flex w-full justify-center items-center gap-3 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="group relative flex w-full justify-center items-center gap-3 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-[#F8F8F8] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <FaGithub className="h-5 w-5" />
               <span>Continue with GitHub</span>
