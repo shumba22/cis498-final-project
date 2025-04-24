@@ -61,14 +61,15 @@ export function NavBar() {
             </a>
           </div>
           {/* Desktop Navigation */}
-          <div className="hidden md:flex flex-1 justify-center items-center space-x-4">
-            <a
-              href="/products"
-              className="text-[#666666] hover:text-gray-900 absolute left-1/2 transform -translate-x-1/2"
-            >
-              Products
-            </a>
-          </div>
+<div className="flex flex-1 justify-center">
+  <a
+    href="/products"
+    className="text-[#666666] hover:text-gray-900"
+  >
+    Products
+  </a>
+</div>
+
           {status !== "loading" && (
             <div className="hidden md:flex items-center">
               <button
@@ -77,11 +78,7 @@ export function NavBar() {
               >
                 {status === "authenticated" ? (
                   <>
-                    <img
-                      src={user.user.image}
-                      alt="User Profile"
-                      className="h-4 w-4 rounded-full mr-2"
-                    />
+             
                     <span>{user.user.name}</span>
                   </>
                 ) : (
